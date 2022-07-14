@@ -1,13 +1,10 @@
-from openpyxl import Workbook
+from openpyxl import load_workbook
 import requests
-import matplotlib.pyplot as plt
-import pandas as pd
-from openpyxl import Workbook
-import openpyxl
 from datetime import date
 
+# Data from api
 codewars = requests.get("https://www.codewars.com/api/v1/users/felipetega")
-today=date.today().strftime("%d/%m/%Y")
+today = date.today().strftime("%d/%m/%Y")
 codewars = codewars.json()
 username = codewars["username"]
 rank = codewars["ranks"]["overall"]["name"]
@@ -16,11 +13,15 @@ codes = codewars["codeChallenges"]["totalCompleted"]
 ranking = codewars["leaderboardPosition"]
 print(f"{today}, {username}, {rank}, honor: {honor}, completed challenges: {codes}, ranking: {ranking}")
 
-book = Workbook()
-sheet = book.active
-rows = (("Class","Honor","Total Completed","Ranking"),
-        (4,5,6),
-        (7,8,9))
-for row in rows:
-  sheet.append(row)
-book.save("Stats.xlsx")
+# Load wb
+workbook_name = 'Stats.xlsx'
+wb = load_workbook(workbook_name)
+page = wb.active
+
+# New data to write:
+new_dataset = [[today,rank,honor,codes,ranking]]
+for data in new_dataset:
+    page.append(data)
+
+# Save data
+wb.save(filename=workbook_name)
