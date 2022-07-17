@@ -67,12 +67,19 @@ plt.plot(Xdate, Yranking, c="black")
 # PLOT 4
 plt.subplot(2, 2, 4)
 # STYLE
-plt.title("Completed Codes", fontdict=font1)
+plt.title("Proportion: Honor X Codes", fontdict=font1)
 #plt.xlabel("Date", fontdict=font2)
 #plt.ylabel("codes", fontdict=font2)
 plt.grid(axis='both', color='gray', linestyle='-', linewidth=1)
 # DATA
-plt.plot(Xdate, YtotalCompleted, c="y")
+
+labels = ['Codes', 'Honor']
+sumCodes = sum(YtotalCompleted)
+sumHonor = sum(Yhonor)
+arrCodesHonor = [sumCodes,sumHonor]
+plt.pie(arrCodesHonor)
+plt.legend(labels, loc="upper right")
+
 
 # SHOW
 plt.show()
