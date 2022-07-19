@@ -10,4 +10,4 @@
 - datetime (Registrar data atual)
 
  ## Prints
- Em breve
+  <img height="300" width="600" src="Figure_1.png">
